@@ -1,0 +1,24 @@
+public class prime1 {
+    public static void prime(int N) {
+        ArrayList<Integer> ds=new ArrayList<>();
+        for (int n = 1; n <= N; n++) {
+            int count=0;
+            for(int i=1;i<=n;i++){
+                if(n%i==0){
+                    count++;
+                }
+            }
+            if(count==2){
+                ds.add(n);
+            }
+        }
+        System.out.println(ds);
+    }
+    public static void main(String[] args){
+        long startTime = System.nanoTime();
+        prime(100000);
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1000000;
+        System.out.println(duration);
+    }
+}
