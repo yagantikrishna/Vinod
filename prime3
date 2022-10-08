@@ -1,25 +1,42 @@
-public class prime3 {
-    public static void prime(int n){
-        boolean[] arr=new boolean[n+1];
-        for(int i=0;i<=n;i++){
-            arr[i]=true;
+import java.util.*;
+
+public class Prime3 {
+
+    //function to find primenumbers upto 1miliion
+    //Approach is to consider all the elements are prime, iterate from 2 to limit, when arr[index] is true mark the multiples of index to false.
+
+    public static void primeNumbers_upto_oneMillion(int limit){
+        boolean[] arr=new boolean[limit+1];
+
+        //Initially marking all the index upto limit to true
+        for(int index=0;index<=limit;index++){
+            arr[index]=true;
         }
-        for(int i=2;i*i<=n;i++){
-            if(arr[i]==true){
-                for(int j=i*i;j<=n;j+=i){
-                    arr[j]=false;
+
+        //Now we iterate from 2 to sqrt(limit) and check if arr[index] is true then all the multiples of index which are greater than (index)^2 are marked false.
+        //We are starting from (index)^2 because it would be already marked in previous iteration
+        for(int index=2;index*index<=limit;index++){
+            if(arr[index]==true){
+                for(int multiple_of_index=index*index;multiple_of_index<=limit;multiple_of_index+=index){
+                    arr[multiple_of_index]=false;
                 }
             }
         }
-        for(int i=2;i<=n;i++){
-            if(arr[i]==true){
-                System.out.print(i+" ");
+
+        //Printing all the remaining elements which are marked true as output
+        for(int index=2;index<=limit;index++){
+            if(arr[index]==true){
+                System.out.print(index+" ");
             }
         }
     }
+
+
     public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
         long startTime = System.nanoTime();
-        prime(1000000);
+        primeNumbers_upto_oneMillion(n);
         long endTime = System.nanoTime();
         long duration = (endTime - startTime)/1000000;
         System.out.println(duration);
