@@ -1,0 +1,54 @@
+//Second approach we are using sqrt(n) because if every non-prime has atleast one divisor less than sqrt(n)
+//We can further optimize this by checking the number is divisible by any prime number less than 10
+//So if the number is not divisible by any of 2,3,5,7 we can declare this as prime number
+public class prime2 {
+
+    // function check
+// whether a number
+// is prime or not
+    static boolean isPrime(int n)
+    {
+        // Corner cases
+        if (n <= 1)
+            return false;
+        if (n <= 3)
+            return true;
+
+        // This is checked so
+        // that we can skip
+        // middle five numbers
+        // in below loop
+        if (n % 2 == 0 ||
+                n % 3 == 0)
+            return false;
+
+        for (int i = 5;
+             i * i <= n; i = i + 6)
+            if (n % i == 0 ||
+                    n % (i + 2) == 0)
+                return false;
+
+        return true;
+    }
+
+    // Function to print primes
+    static void printPrime(int n)
+    {
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime(i))
+                System.out.print(i + " ");
+        }
+    }
+
+    // Driver Code
+    public static void main (String[] args)
+    {
+        long startTime = System.nanoTime();
+        printPrime(1000000);
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1000000;
+        System.out.print(duration);
+
+    }
+}
