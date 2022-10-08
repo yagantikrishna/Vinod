@@ -14,14 +14,11 @@ public class prime2 {
         if (n <= 3)
             return true;
 
-        // This is checked so
-        // that we can skip
-        // middle five numbers
-        // in below loop
+        
         if (n % 2 == 0 ||
                 n % 3 == 0)
             return false;
-
+//if a number is divisible by 2,3,5,7 in a way 2,3,4,5,6,7 multiples are also divisible hence we are skipping next numbers
         for (int i = 5;
              i * i <= n; i = i + 6)
             if (n % i == 0 ||
